@@ -4,12 +4,12 @@ public class User {
     private String name;
     private String lastName;
     private String gender;
-    private Nationality nationality;
+    private String nationality;
 
     public User() {
     }
 
-    public User(String name, String lastName, String gender, Nationality nationality) {
+    public User(String name, String lastName, String gender, String nationality) {
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
@@ -40,11 +40,11 @@ public class User {
         this.gender = gender;
     }
 
-    public Nationality getNationality() {
+    public String getNationality() {
         return nationality;
     }
 
-    public void setNationality(Nationality nationality) {
+    public void setNationality(String nationality) {
         this.nationality = nationality;
     }
 
