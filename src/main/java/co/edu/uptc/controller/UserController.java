@@ -27,9 +27,10 @@ public class UserController {
         if (lines != null) {
             for (String line : lines) {
                 String[] userData = line.split(",");
-                if (userData.length == 4) {
+                if (userData.length == 5) {
 
-                    User user = new User(userData[0], userData[1], userData[2], userData[3]);
+                    User user = new User(Integer.parseInt(userData[0]), userData[1], userData[2], userData[3],
+                            userData[4]);
                     this.users.add(user);
 
                 }
