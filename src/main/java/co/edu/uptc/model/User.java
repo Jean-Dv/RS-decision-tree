@@ -1,6 +1,8 @@
 package co.edu.uptc.model;
 
 public class User {
+
+    private int userId;
     private String name;
     private String lastName;
     private String gender;
@@ -9,7 +11,8 @@ public class User {
     public User() {
     }
 
-    public User(String name, String lastName, String gender, String nationality) {
+    public User(int userId, String name, String lastName, String gender, String nationality) {
+        this.userId = userId;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
@@ -48,10 +51,18 @@ public class User {
         this.nationality = nationality;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
-        return "User [name=" + name + ", lastName=" + lastName + ", gender=" + gender + ", nationality=" + nationality
-                + "]";
+        return "User [userId=" + userId + ", name=" + name + ", lastName=" + lastName + ", gender=" + gender
+                + ", nationality=" + nationality + "]";
     }
 
 }
