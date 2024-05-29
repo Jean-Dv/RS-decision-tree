@@ -15,5 +15,10 @@ public class App {
         users.add(user2);
         users.add(user);
         userController.add(users, "MOCK_DATA");
+        userController.readUserFile("MOCK_DATA");
+
+        for (User user3 : userController.getUsers()) {
+            System.out.println(user3.toString());
+        }
     }
 }
