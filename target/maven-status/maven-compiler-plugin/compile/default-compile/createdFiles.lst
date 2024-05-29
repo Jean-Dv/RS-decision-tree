@@ -1,0 +1,4 @@
+co\edu\uptc\controller\UserController.class
+co\edu\uptc\model\User.class
+co\edu\uptc\util\FilePersistence.class
+co\edu\uptc\view\App.class
