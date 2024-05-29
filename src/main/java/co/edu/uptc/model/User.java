@@ -51,10 +51,18 @@ public class User {
         this.nationality = nationality;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
-        return "User [name=" + name + ", lastName=" + lastName + ", gender=" + gender + ", nationality=" + nationality
-                + "]";
+        return "User [userId=" + userId + ", name=" + name + ", lastName=" + lastName + ", gender=" + gender
+                + ", nationality=" + nationality + "]";
     }
 
 }

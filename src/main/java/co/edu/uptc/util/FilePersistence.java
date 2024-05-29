@@ -19,7 +19,7 @@ public class FilePersistence<T> {
     private File file;
     private ICSVWriter csvWriter;
 
-    public boolean saveUsersToCSV(ArrayList<User> users, String fileName) {
+    public boolean saveUsersToCSV(String[] date, String fileName) {
         String fullFilePath = filePath + fileName + fileExtension;
         file = new File(fullFilePath);
 
@@ -28,10 +28,8 @@ public class FilePersistence<T> {
                     .withQuoteChar(ICSVWriter.NO_QUOTE_CHARACTER)
                     .build();
 
-            for (User user : users) {
-                String[] userCSV = userToCSVLine(user);
-                csvWriter.writeNext(userCSV);
-            }
+            String[] userCSV = date;
+            csvWriter.writeNext(userCSV);
 
             return true;
         } catch (FileNotFoundException e) {
@@ -45,7 +43,4 @@ public class FilePersistence<T> {
 
     }
 
-    private String[] userToCSVLine(User user) {
-        return new String[] { user.getName(), user.getLastName(), user.getNationality(), user.getGender() };
-    }
 }
