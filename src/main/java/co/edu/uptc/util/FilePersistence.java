@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class FilePersistence<T> {
 
-    private static final String filePath = "src\\main\\java\\co\\edu\\uptc\\files\\";
+    private static final String filePath = "src\\main\\resources\\";
     private static final String fileExtension = ".csv";
     private File file;
     private ICSVWriter csvWriter;
