@@ -12,16 +12,16 @@ public class UserController {
 
     public UserController() {
         this.users = new ArrayList<User>();
+        filePersistence = new FilePersistence<User>();
     }
 
     public boolean add(ArrayList<User> users, String fileName) {
-        filePersistence = new FilePersistence<>();
 
         return filePersistence.saveUsersToCSV(users, fileName);
     }
 
     public void readUserFile(String fileName) {
-        filePersistence = new FilePersistence<User>();
+
         String[] lines = filePersistence.readFile(fileName);
 
         if (lines != null) {
