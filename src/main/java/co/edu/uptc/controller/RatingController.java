@@ -19,11 +19,11 @@ public class RatingController {
         String[] lines = filePersistence.readFile(fileName);
         if (lines != null) {
             for (String line : lines) {
-                String[] userData = line.split(",");
-                if (userData.length == 3) {
+                String[] ratingData = line.split(",");
+                if (ratingData.length == 3) {
 
-                    Rating ratings = new Rating(Integer.parseInt(userData[0]), Integer.parseInt(userData[1]),
-                            Double.parseDouble(userData[2]));
+                    Rating ratings = new Rating(Integer.parseInt(ratingData[0]), Integer.parseInt(ratingData[1]),
+                            Double.parseDouble(ratingData[2]));
                     this.ratings.add(ratings);
                 }
             }
