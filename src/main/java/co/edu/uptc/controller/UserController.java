@@ -2,11 +2,11 @@ package co.edu.uptc.controller;
 
 import java.util.ArrayList;
 
+import co.edu.uptc.model.Rating;
 import co.edu.uptc.model.User;
 import co.edu.uptc.util.FilePersistence;
 
 public class UserController {
-
     private FilePersistence<User> filePersistence;
     private ArrayList<User> users;
 
@@ -15,9 +15,28 @@ public class UserController {
         filePersistence = new FilePersistence<User>();
     }
 
-    public boolean add(ArrayList<User> users, String fileName) {
+    public boolean addUser(User users, String fileName) {
 
-        return filePersistence.saveUsersToCSV(users, fileName);
+        String[] list = new String[] { Integer.toString(users.getUserId()), users.getName(), users.getLastName(),
+                users.getNationality() };
+
+        if (filePersistence.saveUsersToCSV(list, fileName)) {
+            return true;
+
+        }
+        return false;
+    }
+
+    public boolean addRating(Rating ratings, String fileName) {
+
+        String[] list = new String[] { Integer.toString(ratings.getUserId()), Integer.toString(ratings.getMovieId()),
+                Double.toString(ratings.getRating()) };
+
+        if (filePersistence.saveUsersToCSV(list, fileName)) {
+            return true;
+
+        }
+        return false;
     }
 
     public void readUserFile(String fileName) {
