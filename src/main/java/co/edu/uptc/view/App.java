@@ -1,24 +1,16 @@
 package co.edu.uptc.view;
 
-import java.util.ArrayList;
-
 import co.edu.uptc.controller.UserController;
+import co.edu.uptc.model.Rating;
 import co.edu.uptc.model.User;
 
 public class App {
     public static void main(String[] args) {
         UserController userController = new UserController();
-        User user = new User("juan", "fernadez", "masculino", "colombiano");
-        User user2 = new User("david", "fernadez", "masculino", "colombiano");
-        ArrayList<User> users = new ArrayList<>();
+        User user = new User(12, "juan", "fernadez", "masculino", "colombiano");
 
-        users.add(user2);
-        users.add(user);
-        userController.add(users, "MOCK_DATA");
-        userController.readUserFile("MOCK_DATA");
-
-        for (User user3 : userController.getUsers()) {
-            System.out.println(user3.toString());
-        }
+        Rating rating = new Rating(12, 45, 1);
+        userController.addUser(user, "MOCK_DATA");
+        userController.addRating(rating, "MOCK_DATA");
     }
 }

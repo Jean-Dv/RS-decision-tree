@@ -1,19 +1,18 @@
 package co.edu.uptc.model;
 
-/**
- * This class represents a rating for a specific item.
- */
 public class Rating {
-    private int userId;
-    private int itemId;
-    private double rating;
-    private String genre;
 
-    public Rating(int userId, int itemId, double rating, String genre) {
+    private int userId;
+    private int movieId;
+    private double rating;
+
+    public Rating() {
+    }
+
+    public Rating(int userId, int itemId, double rating) {
         this.userId = userId;
-        this.itemId = itemId;
+        this.movieId = itemId;
         this.rating = rating;
-        this.genre = genre;
     }
 
     public int getUserId() {
@@ -24,12 +23,12 @@ public class Rating {
         this.userId = userId;
     }
 
-    public int getItemId() {
-        return itemId;
+    public int getMovieId() {
+        return movieId;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setMovieId(int itemId) {
+        this.movieId = itemId;
     }
 
     public double getRating() {
@@ -40,12 +39,9 @@ public class Rating {
         this.rating = rating;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
+    @Override
+    public String toString() {
+        return "Rating [userId=" + userId + ", movieId=" + movieId + ", rating=" + rating + "]";
     }
 
 }
