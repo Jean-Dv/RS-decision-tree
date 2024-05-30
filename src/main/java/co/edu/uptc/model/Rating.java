@@ -1,17 +1,17 @@
 package co.edu.uptc.model;
 
-public class Ratings {
+public class Rating {
 
     private int userId;
-    private int itemId;
+    private int movieId;
     private double rating;
 
-    public Ratings() {
+    public Rating() {
     }
 
-    public Ratings(int userId, int itemId, double rating) {
+    public Rating(int userId, int itemId, double rating) {
         this.userId = userId;
-        this.itemId = itemId;
+        this.movieId = itemId;
         this.rating = rating;
     }
 
@@ -23,12 +23,12 @@ public class Ratings {
         this.userId = userId;
     }
 
-    public int getItemId() {
-        return itemId;
+    public int getMovieId() {
+        return movieId;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setMovieId(int itemId) {
+        this.movieId = itemId;
     }
 
     public double getRating() {
@@ -37,6 +37,11 @@ public class Ratings {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Rating [userId=" + userId + ", movieId=" + movieId + ", rating=" + rating + "]";
     }
 
 }
