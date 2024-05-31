@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Movie {
     private int movieId;
     private String title;
-    private ArrayList<Genr> genres;
+    private ArrayList<String> genres;
 
     public Movie() {
     }
 
-    public Movie(int movieId, String title, ArrayList<Genr> genres) {
+    public Movie(int movieId, String title, ArrayList<String> genres) {
         this.movieId = movieId;
         this.title = title;
         this.genres = genres;
@@ -32,17 +32,17 @@ public class Movie {
         this.title = title;
     }
 
-    public ArrayList<Genr> getGenres() {
+    public ArrayList<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<Genr> genres) {
+    public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
     }
 
     @Override
     public String toString() {
-        return "Movie movieId=" + movieId + ", title=" + title + ", genres=" + genres + "";
+        return "Movie [movieId=" + movieId + ", title=" + title + ", genres=" + genres + "]";
     }
 
 }
