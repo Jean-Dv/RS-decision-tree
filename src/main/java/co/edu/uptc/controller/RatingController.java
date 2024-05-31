@@ -1,6 +1,7 @@
 package co.edu.uptc.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.uptc.model.Rating;
 import co.edu.uptc.util.FilePersistence;
@@ -16,19 +17,14 @@ public class RatingController {
     }
 
     public void readRatingFile(String fileName) {
-        String[] lines = filePersistence.readFile(fileName);
-        if (lines != null) {
-            for (String line : lines) {
-                String[] ratingData = line.split(",");
-                if (ratingData.length == 3) {
+        List<String[]> lines = filePersistence.readFile(fileName);
 
-                    Rating ratings = new Rating(Integer.parseInt(ratingData[0]), Integer.parseInt(ratingData[1]),
-                            Double.parseDouble(ratingData[2]));
-                    this.ratings.add(ratings);
-                }
-            }
+        for (String[] strings : lines) {
+            Rating ratings = new Rating(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]),
+                    Double.parseDouble(strings[2]));
+            this.ratings.add(ratings);
+
         }
-
     }
 
     public ArrayList<Rating> getRatings() {
