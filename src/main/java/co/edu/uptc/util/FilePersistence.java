@@ -2,7 +2,6 @@ package co.edu.uptc.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
