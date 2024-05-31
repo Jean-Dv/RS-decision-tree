@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import co.edu.uptc.controller.UserController;
 import co.edu.uptc.model.User;
 
-@WebServlet("/hello")
+@WebServlet("/user")
 public class ServletUser extends HttpServlet {
 
     @Override
@@ -26,6 +27,8 @@ public class ServletUser extends HttpServlet {
         String gender = request.getParameter("gender");
         String nationality = request.getParameter("nationality");
 
+        System.out.println(name);
+
         if (name == null || lastName == null || gender == null || nationality == null) {
             // Datos incompletos, enviar mensaje de error
             response.getWriter().println("Error: Todos los campos son obligatorios");
@@ -36,6 +39,7 @@ public class ServletUser extends HttpServlet {
 
             UserController uc = new UserController();
             uc.addUser(user, "users");
+            doGet(request, response);
         }
 
     }
@@ -43,19 +47,9 @@ public class ServletUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<User> users = new ArrayList<>();
-        User user = new User(2, "juan2", "fernande", "male", "colobia");
-        User user1 = new User(2, "david", "fernande", "male", "colobia");
-        User user2 = new User(2, "jjsdsd", "fernande", "male", "colobia");
 
-        users.add(user);
-        users.add(user1);
-        users.add(user2);
-
-        HttpSession mSession = request.getSession();
-        mSession.setAttribute("users", users);
-        response.sendRedirect(request.getContextPath() + "/pages/showrecomendations.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/adduser.jsp");
+        requestDispatcher.forward(request, response);
 
     }
-
 }

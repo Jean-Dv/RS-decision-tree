@@ -21,7 +21,7 @@
             <div class=" hidden lg:relative lg:block lg:p-12">
 
               <h2 class="mt-6 text-2xl font-bold text-blue-700 sm:text-3xl md:text-4xl">
-                Welcome 🦑
+                Welcome hola🦑
               </h2>
 
               <p class="mt-4 leading-relaxed text-black/90">
@@ -55,12 +55,12 @@
               </div>
 
               <div style=" border: 1px solid rgb(255, 255, 255); padding: 40px; border-radius: 3%;">
-                <form action="/rs_decision_tree/hello" method="post">
+                <form action="/rs_decision_tree/user" method="post">
                   <div class="flex flex-row gap-x-16 sm:flex-col sm:gap-y-4">
                     <div class="flex-auto">
                       <label
                         class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
-                        <input type="text" name="name1"
+                        <input type="text" name="name"
                           class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-2 w-full"
                           placeholder="name" />
 
