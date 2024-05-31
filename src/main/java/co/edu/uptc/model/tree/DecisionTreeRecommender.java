@@ -6,47 +6,59 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import co.edu.uptc.controller.MovieController;
+import co.edu.uptc.controller.UserController;
 import co.edu.uptc.model.Rating;
 import co.edu.uptc.model.Recommendation;
 
 public class DecisionTreeRecommender {
     private Node root;
+    private String attribute;
+    private MovieController movieController = new MovieController();
+    private UserController userController = new UserController();
     private static final int THREESHOLD = 5;
 
-    public DecisionTreeRecommender(List<Rating> ratings) {
-        this.root = this.buildTree(ratings);
+    public DecisionTreeRecommender(List<Rating> ratings, String attribute) {
+        userController.readUserFile("users");
+        movieController.readMovieFile("movies");
+        this.attribute = attribute;
+        this.root = this.buildTree(ratings, true);
     }
 
-    private Node buildTree(List<Rating> ratings) {
+    private Node buildTree(List<Rating> ratings, boolean isRoot) {
         Node node = new Node();
         if (ratings.size() < THREESHOLD) {
             node.recommendations = this.computeRecommendations(ratings);
             return node;
         }
 
-        String bestAttribute = this.findBestSplitAttribute(ratings);
-        if (bestAttribute == null) {
+        if (this.attribute == null || !isRoot) {
             node.recommendations = this.computeRecommendations(ratings);
             return node;
         }
 
-        Map<String, List<Rating>> splitRatings = this.splitByAttribute(ratings, bestAttribute);
-        node.attribute = bestAttribute;
+        Map<String, List<Rating>> splitRatings = this.splitByAttribute(ratings, this.attribute);
+        node.attribute = this.attribute;
 
         for (Map.Entry<String, List<Rating>> entry : splitRatings.entrySet()) {
-            node.children.put(entry.getKey(), buildTree(entry.getValue()));
+            node.children.put(entry.getKey(), buildTree(entry.getValue(), false));
         }
         return node;
-    }
-
-    private String findBestSplitAttribute(List<Rating> ratings) {
-        return "genre";
     }
 
     private Map<String, List<Rating>> splitByAttribute(List<Rating> ratings, String attribute) {
         Map<String, List<Rating>> splitRatings = new HashMap<>();
         for (Rating rating : ratings) {
-            String attributeValue = rating.getGenre();
+            String attributeValue = null;
+            if (this.attribute == "genre") {
+                attributeValue = userController.getUserById(rating.getUserId()).getGender();
+            }
+            if (this.attribute == "nationality") {
+                attributeValue = userController.getUserById(rating.getUserId()).getNationality();
+            }
+            if (this.attribute == null) {
+                attributeValue = movieController.getMovieById(rating.getMovieId()).getGenres().get(0);
+            }
             splitRatings.putIfAbsent(attributeValue, new ArrayList<Rating>());
             splitRatings.get(attributeValue).add(rating);
         }
@@ -56,12 +68,12 @@ public class DecisionTreeRecommender {
     private List<Recommendation> computeRecommendations(List<Rating> ratings) {
         Map<Integer, Double> scores = new HashMap<Integer, Double>();
         for (Rating rating : ratings) {
-            scores.put(rating.getItemId(), scores.getOrDefault(rating.getItemId(), 0.0) + rating.getRating());
+            scores.put(rating.getMovieId(), scores.getOrDefault(rating.getMovieId(), 0.0) + rating.getRating());
         }
         return scores.entrySet().stream()
                 .map(e -> new Recommendation(e.getKey(), e.getValue() / ratings.size()))
                 .sorted((Recommendation a, Recommendation b) -> Double.compare(b.getScore(), a.getScore()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()).subList(0, 11);
     }
 
     public List<Recommendation> getRecommendations(Map<String, String> userAttributes) {
