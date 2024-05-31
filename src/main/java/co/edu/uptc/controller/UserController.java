@@ -16,10 +16,10 @@ public class UserController {
         filePersistence = new FilePersistence<User>();
     }
 
-    public boolean addUser(User users, String fileName) {
+    public boolean addUser(User user, String fileName) {
 
-        String[] list = new String[] { Integer.toString(users.getUserId()), users.getName(), users.getLastName(),
-                users.getNationality() };
+        String[] list = new String[] { Integer.toString(user.getUserId()), user.getName(), user.getLastName(),
+                user.getNationality() };
 
         if (filePersistence.saveUsersToCSV(list, fileName)) {
             return true;
