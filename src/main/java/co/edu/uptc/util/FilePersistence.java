@@ -2,10 +2,15 @@ package co.edu.uptc.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
+import com.opencsv.exceptions.CsvException;
 import com.opencsv.exceptions.CsvValidationException;
 
 import co.edu.uptc.model.User;
@@ -48,25 +53,26 @@ public class FilePersistence<T> {
 
     }
 
-    public String[] readFile(String fileName) {
+    public List<String[]> readFile(String fileName) {
         file = new File(filePath + fileName + fileExtension);
+        CSVParser parser = new CSVParserBuilder().withSeparator(',').withIgnoreQuotations(false).build();
 
         try {
-            csvReader = new CSVReader(new FileReader(file));
-            List<String> lines = new ArrayList<>();
-            String[] nextLine;
-            while ((nextLine = csvReader.readNext()) != null) {
-                lines.add(String.join(",", nextLine));
-            }
+            csvReader = new CSVReaderBuilder(new FileReader(file)).withSkipLines(1).withCSVParser(parser).build();
+            List<String[]> lines = new ArrayList<>();
+            lines = csvReader.readAll();
             csvReader.close();
-            return lines.toArray(new String[0]);
+            return lines;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (CsvValidationException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (CsvException e) {
+            e.printStackTrace();
         }
+
         return null;
     }
 
