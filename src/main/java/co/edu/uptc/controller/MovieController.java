@@ -2,7 +2,6 @@ package co.edu.uptc.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import co.edu.uptc.model.Movie;
 import co.edu.uptc.util.FilePersistence;
@@ -43,5 +42,4 @@ public class MovieController {
     public ArrayList<Movie> getMovies() {
         return this.movies;
     }
-
 }

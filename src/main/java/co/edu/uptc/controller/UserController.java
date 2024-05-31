@@ -60,4 +60,24 @@ public class UserController {
         return this.users;
     }
 
+    public User getUserById(int userId) {
+        int left = 0;
+        int right = users.size() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            User user = users.get(mid);
+
+            if (user.getUserId() == userId) {
+                return user;
+            } else if (user.getUserId() < userId) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return null; // User not found
+    }
+
 }

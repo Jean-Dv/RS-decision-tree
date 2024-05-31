@@ -2,7 +2,6 @@ package co.edu.uptc.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
@@ -23,7 +22,7 @@ import java.io.IOException;
 
 public class FilePersistence<T> {
 
-    private static final String filePath = "src\\main\\resources\\";
+    private static final String filePath = "src/main/resources/";
     private static final String fileExtension = ".csv";
     private File file;
     private ICSVWriter csvWriter;
