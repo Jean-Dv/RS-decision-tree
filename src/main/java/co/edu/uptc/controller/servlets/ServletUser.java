@@ -28,6 +28,9 @@ public class ServletUser extends HttpServlet {
         String nationality = request.getParameter("nationality");
 
         System.out.println(name);
+        System.out.println(lastName);
+        System.out.println(gender);
+        System.out.println(nationality);
 
         if (name == null || lastName == null || gender == null || nationality == null) {
             // Datos incompletos, enviar mensaje de error
@@ -38,7 +41,7 @@ public class ServletUser extends HttpServlet {
             User user = new User(12, name, lastName, gender, nationality);
             UserController uc = new UserController();
             uc.addUser(user, "users");
-            doGet(request, response);
+            response.sendRedirect(request.getContextPath() + "/users");
         }
 
     }

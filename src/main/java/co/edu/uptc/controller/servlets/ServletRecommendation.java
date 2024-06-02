@@ -26,7 +26,7 @@ import co.edu.uptc.model.tree.DecisionTreeRecommender;
  * ServletRecomendation
  */
 @WebServlet("/recommendation")
-public class ServletRecomendation extends HttpServlet {
+public class ServletRecommendation extends HttpServlet {
     private User user;
 
     @Override
