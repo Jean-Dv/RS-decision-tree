@@ -1,3 +1,5 @@
+<%@ page import="java.util.List"%>
+<%@ page import="co.edu.uptc.model.Movie"%>
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" %>
 <html lang="en">
 <head>
@@ -14,161 +16,244 @@
     <jsp:param name="hrefTitle" value="editorder.jsp" />
   </jsp:include>
   <%@ include file="../components/sidemenu.jsp" %>
-  <main class="ml-60 max-h-screen p-8 mt-20 sm:overflow-auto sm:ml-16">
-    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-        <div class="lg:col-span-2 lg:py-12">
-          <h3 class="text-4xl text-black">Editar orden</h3>
-        </div>
+      <link href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css" rel="stylesheet" />
+      <script type="module">
+        import KeenSlider from 'https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm'
 
-        <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-          <form class="space-y-4">
-            <div>
-              <label
-                for="isCashOn"
-                class="flex cursor-pointer items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50 has-[:checked]:bg-blue-50"
+        // Initialization for the first slider
+        const keenSlider1 = new KeenSlider(
+          '#keen-slider-1',
+          {
+            loop: true,
+            slides: {
+              origin: 'center',
+              perView: 1.25,
+              spacing: 16,
+            },
+            breakpoints: {
+              '(min-width: 1024px)': {
+                slides: {
+                  origin: 'auto',
+                  perView: 1.5,
+                  spacing: 32,
+                },
+              },
+            },
+          },
+          []
+        )
+
+        document.getElementById('keen-slider-previous-1').addEventListener('click', () => keenSlider1.prev())
+        document.getElementById('keen-slider-next-1').addEventListener('click', () => keenSlider1.next())
+
+        // Initialization for the second slider
+        const keenSlider2 = new KeenSlider(
+          '#keen-slider-2',
+          {
+            loop: true,
+            slides: {
+              origin: 'center',
+              perView: 1.25,
+              spacing: 16,
+            },
+            breakpoints: {
+              '(min-width: 1024px)': {
+                slides: {
+                  origin: 'auto',
+                  perView: 1.5,
+                  spacing: 32,
+                },
+              },
+            },
+          },
+          []
+        )
+
+        document.getElementById('keen-slider-previous-2').addEventListener('click', () => keenSlider2.prev())
+        document.getElementById('keen-slider-next-2').addEventListener('click', () => keenSlider2.next())
+      </script>
+      <section class="bg-gray-50">
+        <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
+          <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
+            <div class="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+              <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Recommendation by Nationality
+              </h2>
+            </div>
+            <div class="-mx-6 lg:col-span-2 lg:mx-0">
+              <div id="keen-slider-1" class="keen-slider">
+                <!-- For-->
+                <% 
+                    List<Movie> movies = (List<Movie>) request.getSession().getAttribute("moviesNationality");
+                    if (!movies.isEmpty()) {
+                        for (Movie movie : movies) {
+                %>
+                
+
+                <div class="keen-slider__slide">
+                  <blockquote
+                      class="flex ml-10 h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-auto mx-auto"
+                    >
+                      <div>
+                        <div class="mt-4">
+                          <p class="text-2xl font-bold text-rose-600 sm:text-3xl">Movie</p>
+                          <p class="mt-4 leading-relaxed text-gray-700">
+                            <%=movie.getTitle() %>
+                          </p>
+                          <p class="text-xl font-bold text-rose-500 sm:text-2xl mt-4">Genders</p>
+                          <p class="mt-4 leading-relaxed text-gray-700">
+                            <%=movie.getGenres() %>
+                          </p>
+                        </div>
+                      </div>
+                    </blockquote>
+                </div>
+                <%
+                        }
+                    } else {
+                %>
+                <div class="keen-slider__slide">
+                    <blockquote
+                        class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-full mx-auto"
+                      >
+                    <p class="text-xl">No movies found in the session.</p>
+                    </blockquote>
+                </div>
+                <%
+                    }
+                %>
+                <!--end for-->
+              </div>
+            </div>
+          </div>
+      
+          <div class="mt-8 flex justify-center gap-4 lg:hidden">
+            <button
+              aria-label="Previous slide"
+              id="keen-slider-previous-1"
+              class="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+            >
+              <svg
+                class="size-5 -rotate-180 transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <div class="flex items-center">
-                  &#8203;
-                  <input type="checkbox" class="size-4 rounded border-gray-300" id="isCashOn" />
-                </div>
-
-                <div>
-                  <strong class="font-medium text-gray-900 sm:text-xs sm:font-sm"> Contraentrega </strong>
-                </div>
-              </label>
-            </div>
-            <div class="flex flex-row gap-x-16 sm:flex-col sm:gap-y-4">
-              <div class="flex-auto">
-                <label
-                    for="destinationAddress"
-                    class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-                  >
-                    <input
-                      type="text"
-                      id="remitterName"
-                      class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-2 w-full"
-                      placeholder="Nombre remitente"
-                    />
-
-                    <span
-                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs"
-                    >
-                      Dirección destino
-                    </span>
-                  </label>
-              </div>
-              <div class="flex-auto">
-                <label
-                    for="descriptionAddress"
-                    class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-                  >
-                    <input
-                      type="text"
-                      id="descriptionAddress"
-                      class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-2 sm:p-3 w-full"
-                      placeholder="Descripción de dirección"
-                    />
-
-                    <span
-                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs"
-                    >
-                      Descripción de dirección
-                    </span>
-                  </label>
-              </div>
-            </div>
-            <div class="flex flex-row gap-x-16 sm:flex-col sm:gap-y-4">
-              <div class="flex-auto">
-                <label
-                    for="remitterName"
-                    class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-                  >
-                    <input
-                      type="text"
-                      id="remitterName"
-                      class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-2 w-full"
-                      placeholder="Dirección destino"
-                    />
-
-                    <span
-                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs"
-                    >
-                      Nombre remitente
-                    </span>
-                  </label>
-              </div>
-              <div class="flex-auto">
-                <label
-                    for="addresseeName"
-                    class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-                  >
-                    <input
-                      type="text"
-                      id="addresseeName"
-                      class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-2 sm:p-3 w-full"
-                      placeholder="Nombre destinatario"
-                    />
-
-                    <span
-                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs"
-                    >
-                      Nombre destinatario
-                    </span>
-                  </label>
-              </div>
-
-            </div>
-            <div class="flex flex-row gap-x-16 sm:flex-col sm:gap-y-4">
-              <div class="flex-auto w-full">
-                <label
-                    for="remitterName"
-                    class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-                  >
-                    <input
-                      type="number"
-                      id="price"
-                      class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-2 w-full"
-                      placeholder="Precio"
-                    />
-
-                    <span
-                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs"
-                    >
-                      Precio
-                    </span>
-                </label>
-              </div>
-              <div class="flex-auto w-full">
-                <div>
-                  <select
-                    name="responsible"
-                    id="responsible"
-                    class="block border border-gray-200 shadow-sm w-full focus-within:border-blue-600 focus-within:ring-1 rounded-md bg-transparent border-gray-300 text-gray-700 text-sm sm:text-sm p-2 "
-                  >
-                    <option value="">Responsable</option>
-                    <option value="JM">John Mayer</option>
-                    <option value="SRV">Stevie Ray Vaughn</option>
-                    <option value="JH">Jimi Hendrix</option>
-                    <option value="BBK">B.B King</option>
-                    <option value="AK">Albert King</option>
-                    <option value="BG">Buddy Guy</option>
-                    <option value="EC">Eric Clapton</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="mt-6">
-              <button
-                type="submit"
-                class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
+                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </svg>
+            </button>
+      
+            <button
+              aria-label="Next slide"
+              id="keen-slider-next-1"
+              class="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Envíar
-              </button>
-            </div>
-          </form>
+                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
-  </main>
-  </body>
+      </section>
+
+      <br>
+
+      <section class="bg-gray-50">
+        <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
+          <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
+            <div class="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+              <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+               Recommendation by gender
+              </h2>
+            </div>  
+            <div class="-mx-6 lg:col-span-2 lg:mx-0">
+              <div id="keen-slider-2" class="keen-slider">
+                <!-- For-->
+                <% 
+                    List<Movie> moviesGenres = (List<Movie>) request.getSession().getAttribute("moviesGenres");
+                    if (!moviesGenres.isEmpty()) {
+                        for (Movie movie : moviesGenres) {
+                %>
+
+                <div class="keen-slider__slide">
+                  <blockquote
+                      class="flex ml-10 h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-auto mx-auto"
+                    >
+                      <div>
+                        <div class="mt-4">
+                          <p class="text-2xl font-bold text-rose-600 sm:text-3xl">Movie</p>
+                          <p class="mt-4 leading-relaxed text-gray-700">
+                            <%=movie.getTitle() %>
+                          </p>
+                          <p class="text-xl font-bold text-rose-500 sm:text-2xl mt-4">Genders</p>
+                          <p class="mt-4 leading-relaxed text-gray-700">
+                            <%=movie.getGenres() %>
+                          </p>
+                        </div>
+                      </div>
+                    </blockquote>
+                </div>
+                <% 
+                        }
+                    } else {
+                %>
+                  <div class="keen-slider__slide">
+                    <blockquote
+                        class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-full mx-auto"
+                      >
+                    <p class="text-xl">No movies found in the session.</p>
+                    </blockquote>
+                  </div>
+                <% 
+                    }
+                %>
+
+                <!--end for-->
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 flex justify-center gap-4 lg:hidden">
+            <button
+              aria-label="Previous slide"
+              id="keen-slider-previous-2"
+              class="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+            >
+              <svg
+                class="size-5 -rotate-180 transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </svg>
+            </button>
+
+            <button
+              aria-label="Next slide"
+              id="keen-slider-next-2"
+              class="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+</body>
