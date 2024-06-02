@@ -64,9 +64,9 @@
                   <thead class="ltr:text-left rtl:text-right">
                     <tr>
                       <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
-                      <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Date of Birth</th>
-                      <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Role</th>
-                      <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Salary</th>
+                      <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Last Name</th>
+                      <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Gender</th>
+                      <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nationality</th>
                       <th class="px-4 py-2"></th>
                     </tr>
                   </thead>
@@ -94,7 +94,9 @@
                           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                             <%=user.getGender()%>
                           </td>
-                          <td class="whitespace-nowrap px-4 py-2 text-gray-700">$20,000</td>
+                          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                            <%=user.getNationality()%>
+                          </td>
                           <td class="whitespace-nowrap px-4 py-2">
                             <a href="<%= urlToRecommendation %>" class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white
                               hover:bg-indigo-700">
