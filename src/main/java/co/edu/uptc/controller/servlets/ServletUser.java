@@ -39,7 +39,7 @@ public class ServletUser extends HttpServlet {
                 nationality == null || nationality.trim().isEmpty()) {
 
             // Datos incompletos, enviar mensaje de error
-            request.setAttribute("errorMessage", "Error: Todos los campos son obligatorios");
+            request.setAttribute("errorMessage", "Error: All fields are required");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/adduser.jsp");
             requestDispatcher.forward(request, response);
             return;
