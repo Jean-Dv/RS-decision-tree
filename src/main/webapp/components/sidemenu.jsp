@@ -66,13 +66,14 @@
               </svg>
 
               <span
-                class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
+                class="absolute invisible group-hover:visible z-10 top-1/2 left-full transform -translate-y-1/2 -translate-x-1 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white"
               >
-               Users
+                Users
               </span>
             </a>
           </li>
         </ul>
+
       </div>
     </div>
   </div>

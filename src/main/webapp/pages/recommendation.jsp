@@ -85,13 +85,14 @@
                 <!-- For-->
                 <% 
                     List<Movie> movies = (List<Movie>) request.getSession().getAttribute("moviesNationality");
-                    if (movies != null) {
+                    if (!movies.isEmpty()) {
                         for (Movie movie : movies) {
                 %>
+                
 
                 <div class="keen-slider__slide">
                   <blockquote
-                      class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-auto mx-auto"
+                      class="flex ml-10 h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-auto mx-auto"
                     >
                       <div>
                         <div class="mt-4">
@@ -107,15 +108,20 @@
                       </div>
                     </blockquote>
                 </div>
-                <% 
+                <%
                         }
                     } else {
                 %>
-                <p>No movies found in the session.</p>
-                <% 
+                <div class="keen-slider__slide">
+                    <blockquote
+                        class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-full mx-auto"
+                      >
+                    <p class="text-xl">No movies found in the session.</p>
+                    </blockquote>
+                </div>
+                <%
                     }
                 %>
-
                 <!--end for-->
               </div>
             </div>
@@ -172,13 +178,13 @@
                 <!-- For-->
                 <% 
                     List<Movie> moviesGenres = (List<Movie>) request.getSession().getAttribute("moviesGenres");
-                    if (moviesGenres != null) {
+                    if (!moviesGenres.isEmpty()) {
                         for (Movie movie : moviesGenres) {
                 %>
 
                 <div class="keen-slider__slide">
                   <blockquote
-                      class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-auto mx-auto"
+                      class="flex ml-10 h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-auto mx-auto"
                     >
                       <div>
                         <div class="mt-4">
@@ -198,7 +204,13 @@
                         }
                     } else {
                 %>
-                <p>No movies found in the session.</p>
+                  <div class="keen-slider__slide">
+                    <blockquote
+                        class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 w-full mx-auto"
+                      >
+                    <p class="text-xl">No movies found in the session.</p>
+                    </blockquote>
+                  </div>
                 <% 
                     }
                 %>

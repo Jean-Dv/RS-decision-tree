@@ -36,6 +36,8 @@ public class ServletRecommendation extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String gender = request.getParameter("gender");
+        String nationality = request.getParameter("nationality");
         RatingController ratingController = new RatingController();
         MovieController movieController = new MovieController();
         ratingController.readRatingFile("ratings");
@@ -49,8 +51,8 @@ public class ServletRecommendation extends HttpServlet {
 
         Map<String, String> userAttributesGenres = new HashMap<String, String>();
         Map<String, String> userAttributesNationality = new HashMap<String, String>();
-        userAttributesGenres.put("genre", "Female");
-        userAttributesNationality.put("nationality", "Colombia");
+        userAttributesGenres.put("genre", gender);
+        userAttributesNationality.put("nationality", nationality);
 
         List<Recommendation> recommendationsNationality = decisionTreeRecommenderNationality
                 .getRecommendations(userAttributesNationality);
@@ -67,6 +69,7 @@ public class ServletRecommendation extends HttpServlet {
         mSession.setAttribute("moviesGenres", moviesGenres);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/recommendation.jsp");
         requestDispatcher.forward(request, response);
+
     }
 
     @Override
