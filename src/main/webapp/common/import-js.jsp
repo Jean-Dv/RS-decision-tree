@@ -1,13 +1,11 @@
 <%@ page contentType="text/html" language="java" %>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            clifford: '#da373d',
-          }
-        }
-      }
+        theme: {
+      screens: {
+        'sm': {max: "960px"},
+      },
     }
-  </script>
+  }
+</script>

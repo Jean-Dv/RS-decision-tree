@@ -36,7 +36,6 @@ public class ServletUser extends HttpServlet {
 
         } else {
             User user = new User(12, name, lastName, gender, nationality);
-
             UserController uc = new UserController();
             uc.addUser(user, "users");
             doGet(request, response);
