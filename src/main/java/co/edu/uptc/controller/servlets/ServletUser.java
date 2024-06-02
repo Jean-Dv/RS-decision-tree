@@ -27,19 +27,28 @@ public class ServletUser extends HttpServlet {
         String gender = request.getParameter("gender");
         String nationality = request.getParameter("nationality");
 
-        System.out.println(name);
+        String urlToRecommendation = "/rs_decision_tree/recommendation";
+        urlToRecommendation += "?name=" + name;
+        urlToRecommendation += "&lastName=" + lastName;
+        urlToRecommendation += "&gender=" + gender;
+        urlToRecommendation += "&nationality=" + nationality;
 
-        if (name == null || lastName == null || gender == null || nationality == null) {
+        if (name == null || name.trim().isEmpty() ||
+                lastName == null || lastName.trim().isEmpty() ||
+                gender == null || gender.trim().isEmpty() ||
+                nationality == null || nationality.trim().isEmpty()) {
+
             // Datos incompletos, enviar mensaje de error
-            response.getWriter().println("Error: Todos los campos son obligatorios");
+            request.setAttribute("errorMessage", "Error: Todos los campos son obligatorios");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/adduser.jsp");
+            requestDispatcher.forward(request, response);
             return;
 
         } else {
             User user = new User(12, name, lastName, gender, nationality);
-
             UserController uc = new UserController();
             uc.addUser(user, "users");
-            doGet(request, response);
+            response.sendRedirect(urlToRecommendation);
         }
 
     }

@@ -19,6 +19,7 @@ public class UserController {
     public boolean addUser(User user, String fileName) {
 
         String[] list = new String[] { Integer.toString(user.getUserId()), user.getName(), user.getLastName(),
+                user.getGender(),
                 user.getNationality() };
 
         if (filePersistence.saveUsersToCSV(list, fileName)) {
