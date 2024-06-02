@@ -45,8 +45,11 @@ public class ServletUser extends HttpServlet {
             return;
 
         } else {
-            User user = new User(12, name, lastName, gender, nationality);
             UserController uc = new UserController();
+            uc.readUserFile("users");
+            int id = uc.getUsers().get(uc.getUsers().size() - 1).getUserId() + 1;
+            User user = new User(id, name, lastName, gender, nationality);
+
             uc.addUser(user, "users");
             response.sendRedirect(urlToRecommendation);
         }
