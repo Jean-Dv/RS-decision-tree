@@ -12,7 +12,7 @@
       <div class="px-2">
         <div class="py-4">
           <a
-            href="#"
+            href="/rs_decision_tree//user"
             class="t group relative flex justify-center rounded bg-blue-50 px-2 py-1.5 text-blue-700"
           >
             <svg
@@ -39,7 +39,7 @@
             <span
               class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
             >
-              Añadir
+              Add
             </span>
           </a>
         </div>
@@ -47,7 +47,7 @@
         <ul class="space-y-1 border-t border-gray-100 pt-4">
           <li>
             <a
-              href="#"
+              href="/rs_decision_tree/users"
               class="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
             >
               <svg
@@ -68,7 +68,7 @@
               <span
                 class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
               >
-                Usuarios
+               Users
               </span>
             </a>
           </li>
