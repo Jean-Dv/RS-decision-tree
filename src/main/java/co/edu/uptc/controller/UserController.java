@@ -8,12 +8,21 @@ import co.edu.uptc.model.User;
 import co.edu.uptc.util.FilePersistence;
 
 public class UserController {
+    private static UserController _instance;
     private FilePersistence<User> filePersistence;
     private ArrayList<User> users;
 
-    public UserController() {
+    private UserController() {
         this.users = new ArrayList<User>();
         filePersistence = new FilePersistence<User>();
+    }
+
+    public static UserController getInstance() {
+        if (_instance == null) {
+            _instance = new UserController();
+            _instance.readUserFile("users", true);
+        }
+        return _instance;
     }
 
     public boolean addUser(User user, String fileName) {
@@ -41,8 +50,13 @@ public class UserController {
         return false;
     }
 
-    public void readUserFile(String fileName) {
-
+    public void readUserFile(String fileName, boolean force) {
+        if (force) {
+            this.users.clear();
+        }
+        if (this.users.size() > 0) {
+            return;
+        }
         List<String[]> lines = filePersistence.readFile(fileName);
         if (lines == null) {
             return;

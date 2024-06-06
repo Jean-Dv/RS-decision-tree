@@ -1,9 +1,7 @@
 package co.edu.uptc.controller.servlets;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import javax.servlet.RequestDispatcher;
@@ -24,8 +22,8 @@ public class ServletUsers extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        UserController usersController = new UserController();
-        usersController.readUserFile("users");
+        UserController usersController = UserController.getInstance();
+        usersController.readUserFile("users", true);
         ArrayList<User> listUsers = usersController.getUsers();
         Collections.reverse(listUsers);
         HttpSession mSession = request.getSession();
