@@ -45,8 +45,8 @@ public class ServletUser extends HttpServlet {
             return;
 
         } else {
-            UserController uc = new UserController();
-            uc.readUserFile("users");
+            UserController uc = UserController.getInstance();
+            uc.readUserFile("users", true);
             int id = uc.getUsers().get(uc.getUsers().size() - 1).getUserId() + 1;
             User user = new User(id, name, lastName, gender, nationality);
 
