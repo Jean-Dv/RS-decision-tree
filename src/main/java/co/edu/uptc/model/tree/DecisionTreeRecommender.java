@@ -14,13 +14,13 @@ import co.edu.uptc.model.Recommendation;
 public class DecisionTreeRecommender {
     private Node root;
     private String attribute;
-    private MovieController movieController = new MovieController();
-    private UserController userController = new UserController();
+    private MovieController movieController = MovieController.getInstance();
+    private UserController userController = UserController.getInstance();
     private static final int THREESHOLD = 5;
 
     public DecisionTreeRecommender(List<Rating> ratings, String attribute) {
-        userController.readUserFile("users");
-        movieController.readMovieFile("movies");
+        userController.readUserFile("users", true);
+        movieController.readMovieFile("movies", true);
         this.attribute = attribute;
         this.root = this.buildTree(ratings, true);
     }
@@ -47,20 +47,24 @@ public class DecisionTreeRecommender {
     }
 
     private Map<String, List<Rating>> splitByAttribute(List<Rating> ratings, String attribute) {
+
         Map<String, List<Rating>> splitRatings = new HashMap<>();
         for (Rating rating : ratings) {
-            String attributeValue = null;
+            List<String> attributeValues = new ArrayList<>();
             if (this.attribute == "genre") {
-                attributeValue = userController.getUserById(rating.getUserId()).getGender();
+                if (movieController.getMovieById(rating.getMovieId()) == null) {
+                    attributeValues.add("Unknown");
+                } else {
+                    attributeValues = movieController.getMovieById(rating.getMovieId()).getGenres();
+                }
             }
             if (this.attribute == "nationality") {
-                attributeValue = userController.getUserById(rating.getUserId()).getNationality();
+                attributeValues.add(userController.getUserById(rating.getUserId()).getNationality());
             }
-            if (this.attribute == null) {
-                attributeValue = movieController.getMovieById(rating.getMovieId()).getGenres().get(0);
-            }
-            splitRatings.putIfAbsent(attributeValue, new ArrayList<Rating>());
-            splitRatings.get(attributeValue).add(rating);
+            attributeValues.forEach(attributeValue -> {
+                splitRatings.putIfAbsent(attributeValue, new ArrayList<Rating>());
+                splitRatings.get(attributeValue).add(rating);
+            });
         }
         return splitRatings;
     }
@@ -70,10 +74,15 @@ public class DecisionTreeRecommender {
         for (Rating rating : ratings) {
             scores.put(rating.getMovieId(), scores.getOrDefault(rating.getMovieId(), 0.0) + rating.getRating());
         }
-        return scores.entrySet().stream()
+        List<Recommendation> recommendations = new ArrayList<Recommendation>();
+        recommendations = scores.entrySet().stream()
                 .map(e -> new Recommendation(e.getKey(), e.getValue() / ratings.size()))
                 .sorted((Recommendation a, Recommendation b) -> Double.compare(b.getScore(), a.getScore()))
-                .collect(Collectors.toList()).subList(0, 11);
+                .collect(Collectors.toList());
+        if (recommendations.size() > 10) {
+            return recommendations.subList(0, 10);
+        }
+        return recommendations;
     }
 
     public List<Recommendation> getRecommendations(Map<String, String> userAttributes) {
