@@ -3,6 +3,8 @@ package co.edu.uptc.controller.servlets;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +27,7 @@ public class ServletUsers extends HttpServlet {
         UserController usersController = new UserController();
         usersController.readUserFile("users");
         ArrayList<User> listUsers = usersController.getUsers();
-
+        Collections.reverse(listUsers);
         HttpSession mSession = request.getSession();
         mSession.setAttribute("listUsers", listUsers);
 

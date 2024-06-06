@@ -72,13 +72,23 @@
         document.getElementById('keen-slider-previous-2').addEventListener('click', () => keenSlider2.prev())
         document.getElementById('keen-slider-next-2').addEventListener('click', () => keenSlider2.next())
       </script>
+
+
       <section class="bg-gray-50">
         <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
           <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
-            <div class="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-              <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <div class="max-w-xl ltr:sm:text-left rtl:sm:text-right">
+              <h1 class="text-3xl font-bold tracking-tight text-rose-600 sm:text-4xl mb-4">
+                <% String name = (String) request.getSession().getAttribute("nameUser"); %>
+                Hi <%=name.toUpperCase().charAt(0)+ name.substring(1, name.length()).toLowerCase()%>! 👋
+              </h1> 
+              <h4 class="text-2xl tracking-tight text-gray-900 sm:text-4xl mb-6">
+                Your recommendation is based on
+                the genre of movies you selected and your nationality.
+              </h4>
+              <h6 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-8">
                 Recommendation by Nationality
-              </h2>
+              </h6>
             </div>
             <div class="-mx-6 lg:col-span-2 lg:mx-0">
               <div id="keen-slider-1" class="keen-slider">
@@ -169,10 +179,10 @@
         <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
           <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
             <div class="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-              <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                <% String gender = (String) request.getSession().getAttribute("nameGenresMovie"); %>
-               Recommendation by <%=gender %> gender 
-              </h2>
+               Recommendation by <%=gender.toLowerCase()%> movies 
+              </h1>
             </div>  
             <div class="-mx-6 lg:col-span-2 lg:mx-0">
               <div id="keen-slider-2" class="keen-slider">

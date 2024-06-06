@@ -7,16 +7,18 @@ public class User {
     private String lastName;
     private String gender;
     private String nationality;
+    private String genderMovie;
 
     public User() {
     }
 
-    public User(int userId, String name, String lastName, String gender, String nationality) {
+    public User(int userId, String name, String lastName, String gender, String nationality, String genderMovie) {
         this.userId = userId;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
         this.nationality = nationality;
+        this.genderMovie = genderMovie;
     }
 
     public String getName() {
@@ -59,10 +61,18 @@ public class User {
         this.userId = userId;
     }
 
+    public String getGenderMovie() {
+        return genderMovie;
+    }
+
+    public void setGenderMovie(String genderMovie) {
+        this.genderMovie = genderMovie;
+    }
+
     @Override
     public String toString() {
         return "User [userId=" + userId + ", name=" + name + ", lastName=" + lastName + ", gender=" + gender
-                + ", nationality=" + nationality + "]";
+                + ", nationality=" + nationality + ", genderMovie=" + genderMovie + "]";
     }
 
 }

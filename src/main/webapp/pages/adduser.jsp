@@ -11,12 +11,7 @@
     </head>
 
     <body>
-      <jsp:include page="../components/navbar.jsp">
-        <jsp:param name="section" value="Ordenes" />
-        <jsp:param name="hrefSection" value="orders.jsp" />
-        <jsp:param name="title" value="Agregar orden" />
-        <jsp:param name="hrefTitle" value="addorder.jsp" />
-      </jsp:include>
+    
       <%@ include file="../components/sidemenu.jsp" %>
 
         <!--
@@ -25,16 +20,13 @@
   Plugins:
     - @tailwindcss/forms
 -->
-
-
         <main class="ml-4 max-h-screen p-8 mt-20 sm:overflow-auto sm:ml-16">
-          <div class="max-w-screen-md px-4 py-16 sm:px-6 lg:px-8">
+         <div class="max-w-screen-md px-4 py-16 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
               <div class=" mx-auto max-w-lg text-center ">
                 <h3 class="text-4xl text-black">Add User</h3>
                  <p class="mt-4 text-gray-500"> Dear user, to access our movie recommendation system, please provide the following information.</p> 
-              </div>
-            
+                 </div>
 
               <div class="rounded-lg bg-white p-8 lg:col-span-3 lg:p-12">
                 <form action="/rs_decision_tree/user" method="post" href="<%= urlToRecommendation %>" class="space-y-4">
@@ -82,6 +74,15 @@
                   </div> 
                   <div class="flex flex-row gap-x-4 justify-center">
                     <div class="w-1/4">
+                      <select name="gender"
+                        class="block border border-gray-200 shadow-sm w-full focus-within:border-blue-600 focus-within:ring-1 rounded-md bg-transparent border-gray-300 text-gray-700 text-sm sm:text-sm p-2">
+                        <option value="">Gender </option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+
+                      </select>
+                    </div>
+                    <div class="w-1/4">
                       <select name="nationality"
                         class="block border border-gray-200 shadow-sm w-full focus-within:border-rose-600 focus-within:ring-1 rounded-md bg-transparent border-gray-300 text-gray-700 text-sm sm:text-sm p-2">
                         <option value="">Nationality </option>
@@ -92,15 +93,15 @@
                     </div>
                     
                     <div class="w-1/4">
-                      <select name="gender"
+                      <select name="genderMovie"
                         class="block border border-gray-200 shadow-sm w-full focus-within:border-blue-600 focus-within:ring-1 rounded-md bg-transparent border-gray-300 text-gray-700 text-sm sm:text-sm p-2">
                         <option value="">Movie genre </option>
-                        <option value="Male">Action</option>
-                        <option value="Female">Comedy</option>
-                        <option value="Female">Romance</option>
-                        <option value="Female">Thriller</option>
-                        <option value="Female">Animation</option>
-                        <option value="Female">Drama</option>
+                        <option value="Action">Action</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Animation">Animation</option>
+                        <option value="Drama">Drama</option>
 
                       </select>
                     </div>

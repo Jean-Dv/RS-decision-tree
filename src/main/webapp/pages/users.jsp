@@ -41,7 +41,7 @@
 
                       for (User user : listUsers){
 
-                      urlToRecommendation = urlToRecommendation + "?gender=" + user.getGender() + "&nationality=" +
+                      urlToRecommendation = urlToRecommendation + "?name="+ user.getName() + "&gender=" + user.getGender() + "&nationality=" +
                       user.getNationality();
 
 

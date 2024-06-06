@@ -1,13 +1,11 @@
 package co.edu.uptc.controller.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.print.DocFlavor.STRING;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,11 +17,8 @@ import javax.servlet.http.HttpSession;
 import co.edu.uptc.controller.MovieController;
 import co.edu.uptc.controller.RatingController;
 import co.edu.uptc.model.Movie;
-import co.edu.uptc.model.Rating;
 import co.edu.uptc.model.Recommendation;
-//import co.edu.uptc.controller.RatingController;
-import co.edu.uptc.model.User;
-//import co.edu.uptc.model.tree.DecisionTreeRecommender;
+
 import co.edu.uptc.model.tree.DecisionTreeRecommender;
 
 /**
@@ -36,8 +31,9 @@ public class ServletRecommendation extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
 
-                String gender = request.getParameter("gender");
+                String genderMovie = request.getParameter("genderMovie");
                 String nationality = request.getParameter("nationality");
+                String name = request.getParameter("name");
 
                 RatingController ratingController = new RatingController();
                 MovieController movieController = new MovieController();
@@ -54,7 +50,7 @@ public class ServletRecommendation extends HttpServlet {
 
                 Map<String, String> userAttributesGenres = new HashMap<String, String>();
                 Map<String, String> userAttributesNationality = new HashMap<String, String>();
-                userAttributesGenres.put("genre", gender);
+                userAttributesGenres.put("genre", genderMovie);
                 userAttributesNationality.put("nationality", nationality);
 
                 List<Recommendation> recommendationsNationality = decisionTreeRecommenderNationality
@@ -71,9 +67,11 @@ public class ServletRecommendation extends HttpServlet {
 
                 HttpSession mSession = request.getSession();
 
-                mSession.setAttribute("nameGenresMovie", gender);
+                mSession.setAttribute("nameUser", name);
+                mSession.setAttribute("nameGenresMovie", genderMovie);
                 mSession.setAttribute("moviesNationality", moviesNationality);
                 mSession.setAttribute("moviesGenres", moviesGenres);
+
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/recommendation.jsp");
                 requestDispatcher.forward(request, response);
 

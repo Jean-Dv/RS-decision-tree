@@ -20,7 +20,7 @@ public class UserController {
 
         String[] list = new String[] { Integer.toString(user.getUserId()), user.getName(), user.getLastName(),
                 user.getGender(),
-                user.getNationality() }; 
+                user.getNationality(), user.getGenderMovie() };
 
         if (filePersistence.saveUsersToCSV(list, fileName)) {
             return true;
@@ -50,7 +50,7 @@ public class UserController {
 
         for (String[] strings : lines) {
             User user = new User(Integer.parseInt(strings[0]), strings[1], strings[2], strings[3],
-                    strings[4]);
+                    strings[4], strings[5]);
             this.users.add(user);
 
         }
