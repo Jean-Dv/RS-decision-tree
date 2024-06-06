@@ -22,7 +22,7 @@
           <%@ include file="../components/sidemenu.jsp" %>
 
             <main class="ml-60 max-h-screen overflow-auto p-8 mt-20 sm:ml-16">
-              
+
               <div class="overflow-x-auto">
                 <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                   <thead class="ltr:text-left rtl:text-right">
@@ -41,8 +41,7 @@
 
                       for (User user : listUsers){
 
-                      urlToRecommendation = urlToRecommendation + "?gender=" + user.getGender() + "&nationality=" +
-                      user.getNationality();
+                      urlToRecommendation = urlToRecommendation + "?name="+ user.getName() + "&lastName=" + user.getLastName() + "&gender=" + user.getGender() + "&nationality=" + user.getNationality() + "&genderMovie=" + user.getGenderMovie();
 
 
                       %>
@@ -62,8 +61,8 @@
                             <%=user.getNationality()%>
                           </td>
                           <td class="whitespace-nowrap px-4 py-2">
-                            <a href="<%= urlToRecommendation %>" class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white
-                              hover:bg-indigo-700">
+                            <a href="<%= urlToRecommendation %>" class="inline-block rounded bg-rose-600 px-4 py-2 text-xs font-medium text-white
+                              hover:bg-rose-400">
                               View
                             </a>
                           </td>

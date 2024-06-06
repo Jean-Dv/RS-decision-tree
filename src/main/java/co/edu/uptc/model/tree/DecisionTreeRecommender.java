@@ -19,8 +19,8 @@ public class DecisionTreeRecommender {
     private static final int THREESHOLD = 5;
 
     public DecisionTreeRecommender(List<Rating> ratings, String attribute) {
-        userController.readUserFile("users", false);
-        movieController.readMovieFile("movies", false);
+        userController.readUserFile("users", true);
+        movieController.readMovieFile("movies", true);
         this.attribute = attribute;
         this.root = this.buildTree(ratings, true);
     }
