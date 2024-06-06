@@ -43,6 +43,18 @@ public class ServletUser extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/adduser.jsp");
             requestDispatcher.forward(request, response);
             return;
+        } else if (!name.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
+            // Validar solo si el nombre no contiene solo letras
+            request.setAttribute("error1", "only letters.");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/adduser.jsp");
+            requestDispatcher.forward(request, response);
+            return;
+
+        } else if (!name.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
+            request.setAttribute("error2", "only letters.");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/adduser.jsp");
+            requestDispatcher.forward(request, response);
+            return;
 
         } else {
             UserController uc = new UserController();
