@@ -32,50 +32,57 @@ import co.edu.uptc.model.tree.DecisionTreeRecommender;
 @WebServlet("/recommendation")
 public class ServletRecommendation extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
 
-        String gender = request.getParameter("gender");
-        String nationality = request.getParameter("nationality");
-        RatingController ratingController = new RatingController();
-        MovieController movieController = new MovieController();
-        ratingController.readRatingFile("ratings");
-        movieController.readMovieFile("movies");
-        DecisionTreeRecommender decisionTreeRecommenderGender = new DecisionTreeRecommender(
-                ratingController.getRatings(),
-                "genre");
-        DecisionTreeRecommender decisionTreeRecommenderNationality = new DecisionTreeRecommender(
-                ratingController.getRatings(),
-                "nationality");
+                String gender = request.getParameter("gender");
+                String nationality = request.getParameter("nationality");
 
-        Map<String, String> userAttributesGenres = new HashMap<String, String>();
-        Map<String, String> userAttributesNationality = new HashMap<String, String>();
-        userAttributesGenres.put("genre", gender);
-        userAttributesNationality.put("nationality", nationality);
+                RatingController ratingController = new RatingController();
+                MovieController movieController = new MovieController();
 
-        List<Recommendation> recommendationsNationality = decisionTreeRecommenderNationality
-                .getRecommendations(userAttributesNationality);
-        List<Recommendation> recommendationsGenres = decisionTreeRecommenderGender
-                .getRecommendations(userAttributesGenres);
+                ratingController.readRatingFile("ratings");
+                movieController.readMovieFile("movies");
 
-        List<Movie> moviesNationality = recommendationsNationality.stream()
-                .map(item -> movieController.getMovieById(item.getItemId())).collect(Collectors.toList());
-        List<Movie> moviesGenres = recommendationsGenres.stream()
-                .map(item -> movieController.getMovieById(item.getItemId())).collect(Collectors.toList());
+                DecisionTreeRecommender decisionTreeRecommenderGender = new DecisionTreeRecommender(
+                                ratingController.getRatings(),
+                                "genre");
+                DecisionTreeRecommender decisionTreeRecommenderNationality = new DecisionTreeRecommender(
+                                ratingController.getRatings(),
+                                "nationality");
 
-        HttpSession mSession = request.getSession();
-        mSession.setAttribute("moviesNationality", moviesNationality);
-        mSession.setAttribute("moviesGenres", moviesGenres);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/recommendation.jsp");
-        requestDispatcher.forward(request, response);
+                Map<String, String> userAttributesGenres = new HashMap<String, String>();
+                Map<String, String> userAttributesNationality = new HashMap<String, String>();
+                userAttributesGenres.put("genre", gender);
+                userAttributesNationality.put("nationality", nationality);
 
-    }
+                List<Recommendation> recommendationsNationality = decisionTreeRecommenderNationality
+                                .getRecommendations(userAttributesNationality);
+                List<Recommendation> recommendationsGenres = decisionTreeRecommenderGender
+                                .getRecommendations(userAttributesGenres);
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
-    }
+                List<Movie> moviesNationality = recommendationsNationality.stream()
+                                .map(item -> movieController.getMovieById(item.getItemId()))
+                                .collect(Collectors.toList());
+                List<Movie> moviesGenres = recommendationsGenres.stream()
+                                .map(item -> movieController.getMovieById(item.getItemId()))
+                                .collect(Collectors.toList());
+
+                HttpSession mSession = request.getSession();
+
+                mSession.setAttribute("nameGenresMovie", gender);
+                mSession.setAttribute("moviesNationality", moviesNationality);
+                mSession.setAttribute("moviesGenres", moviesGenres);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/recommendation.jsp");
+                requestDispatcher.forward(request, response);
+
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                doGet(request, response);
+        }
 
 }

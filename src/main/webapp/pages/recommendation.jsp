@@ -170,7 +170,8 @@
           <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
             <div class="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-               Recommendation by gender
+               <% String gender = (String) request.getSession().getAttribute("nameGenresMovie"); %>
+               Recommendation by <%=gender %> gender 
               </h2>
             </div>  
             <div class="-mx-6 lg:col-span-2 lg:mx-0">
