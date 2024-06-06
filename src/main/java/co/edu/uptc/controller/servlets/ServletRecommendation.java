@@ -38,10 +38,10 @@ public class ServletRecommendation extends HttpServlet {
 
         String gender = request.getParameter("gender");
         String nationality = request.getParameter("nationality");
-        RatingController ratingController = new RatingController();
-        MovieController movieController = new MovieController();
-        ratingController.readRatingFile("ratings");
-        movieController.readMovieFile("movies");
+        RatingController ratingController = RatingController.getInstance();
+        MovieController movieController = MovieController.getInstance();
+        ratingController.readRatingFile("ratings", false);
+        movieController.readMovieFile("movies", false);
         DecisionTreeRecommender decisionTreeRecommenderGender = new DecisionTreeRecommender(
                 ratingController.getRatings(),
                 "genre");

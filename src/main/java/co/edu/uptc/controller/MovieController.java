@@ -8,15 +8,30 @@ import co.edu.uptc.util.FilePersistence;
 
 public class MovieController {
 
+    private static MovieController _instance;
     private FilePersistence<Movie> filePersistence;
     private ArrayList<Movie> movies;
 
-    public MovieController() {
+    private MovieController() {
         this.movies = new ArrayList<Movie>();
         filePersistence = new FilePersistence<Movie>();
     }
 
-    public void readMovieFile(String fileName) {
+    public static MovieController getInstance() {
+        if (_instance == null) {
+            _instance = new MovieController();
+            _instance.readMovieFile("movies", true);
+        }
+        return _instance;
+    }
+
+    public void readMovieFile(String fileName, boolean force) {
+        if (force) {
+            this.movies.clear();
+        }
+        if (this.movies.size() > 0) {
+            return;
+        }
         List<String[]> lines = filePersistence.readFile(fileName);
         if (lines == null) {
             return;

@@ -14,13 +14,13 @@ import co.edu.uptc.model.Recommendation;
 public class DecisionTreeRecommender {
     private Node root;
     private String attribute;
-    private MovieController movieController = new MovieController();
-    private UserController userController = new UserController();
+    private MovieController movieController = MovieController.getInstance();
+    private UserController userController = UserController.getInstance();
     private static final int THREESHOLD = 5;
 
     public DecisionTreeRecommender(List<Rating> ratings, String attribute) {
-        userController.readUserFile("users");
-        movieController.readMovieFile("movies");
+        userController.readUserFile("users", false);
+        movieController.readMovieFile("movies", false);
         this.attribute = attribute;
         this.root = this.buildTree(ratings, true);
     }
