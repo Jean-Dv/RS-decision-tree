@@ -24,13 +24,14 @@
             <main class="ml-60 max-h-screen overflow-auto p-8 mt-20 sm:ml-16">
 
               <div class="overflow-x-auto">
-                <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                <table class="min-w-full divide-y-2 divide-gray-10 bg-white text-sm">
                   <thead class="ltr:text-left rtl:text-right">
                     <tr>
                       <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
                       <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Last Name</th>
                       <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Gender</th>
                       <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nationality</th>
+                      <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Movie genre</th>
                       <th class="px-4 py-2"></th>
                     </tr>
                   </thead>
@@ -45,7 +46,7 @@
 
 
                       %>
-                      <tbody class="divide-y divide-gray-200">
+                      <tbody class="divide-y divide-gray-200" >
 
                         <tr>
                           <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
@@ -59,6 +60,9 @@
                           </td>
                           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                             <%=user.getNationality()%>
+                          </td>
+                           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                            <%=user.getGenderMovie()%>
                           </td>
                           <td class="whitespace-nowrap px-4 py-2">
                             <a href="<%= urlToRecommendation %>" class="inline-block rounded bg-rose-600 px-4 py-2 text-xs font-medium text-white

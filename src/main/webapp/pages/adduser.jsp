@@ -34,7 +34,7 @@
 
                     <div class="w-1/4">
                       <label for="remitterName"
-                        class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-rose-600 focus-within:ring-1 focus-within:ring-blue-600">
+                        class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-rose-600 focus-within:ring-1 focus-within:ring-rose-600">
                         <input type="text" name="name"
                           class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-2 w-full"
                           placeholder="Nombre remitente" />
@@ -54,7 +54,7 @@
                     </div>
                     <div class="w-1/4">
                       <label for="descriptionAddress"
-                        class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-rose-600 focus-within:ring-1 focus-within:ring-blue-600">
+                        class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-rose-600 focus-within:ring-1 focus-within:ring-rose-600">
                         <input type="text" name="lastName"
                           class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-2 w-full"
                           placeholder="Descripción de dirección" />
@@ -75,7 +75,7 @@
                   <div class="flex flex-row gap-x-4 justify-center">
                     <div class="w-1/4">
                       <select name="gender"
-                        class="block border border-gray-200 shadow-sm w-full focus-within:border-blue-600 focus-within:ring-1 rounded-md bg-transparent border-gray-300 text-gray-700 text-sm sm:text-sm p-2">
+                        class="block border border-gray-200 shadow-sm w-full focus-within:border-rose-600 focus-within:ring-1 rounded-md bg-transparent border-gray-300 text-gray-700 text-sm sm:text-sm p-2">
                         <option value="">Gender </option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -94,7 +94,7 @@
                     
                     <div class="w-1/4">
                       <select name="genderMovie"
-                        class="block border border-gray-200 shadow-sm w-full focus-within:border-blue-600 focus-within:ring-1 rounded-md bg-transparent border-gray-300 text-gray-700 text-sm sm:text-sm p-2">
+                        class="block border border-gray-200 shadow-sm w-full focus-within:border-rose-600 focus-within:ring-1 rounded-md bg-transparent border-gray-300 text-gray-700 text-sm sm:text-sm p-2">
                         <option value="">Movie genre </option>
                         <option value="Action">Action</option>
                         <option value="Comedy">Comedy</option>
